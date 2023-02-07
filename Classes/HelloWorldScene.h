@@ -50,6 +50,9 @@ public:
 
 private:
     ExampleGameState _gameState = ExampleGameState::init;
+    
+    bool onTouchesBegan(ax::Touch *touch, ax::Event *event);
+    void spawnSprite(const std::string &name, ax::Vec2 pos);
 };
 
 #endif  // __HELLOWORLD_SCENE_H__
