@@ -49,10 +49,10 @@ public:
     void menuCloseCallback(Ref* sender);
 
 private:
-    ExampleGameState _gameState = ExampleGameState::init;
-    
+    void spawnSprite(const std::string &name, const ax::Vec2 &pos);
     bool onTouchesBegan(ax::Touch *touch, ax::Event *event);
-    void spawnSprite(const std::string &name, ax::Vec2 pos);
+    
+    ExampleGameState _gameState = ExampleGameState::init;
 };
 
 #endif  // __HELLOWORLD_SCENE_H__

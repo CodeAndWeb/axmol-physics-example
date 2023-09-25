@@ -51,6 +51,7 @@ PhysicsShapeCache *PhysicsShapeCache::getInstance()
 bool PhysicsShapeCache::addShapesWithFile(const std::string &plist)
 {
     float scaleFactor = Director::getInstance()->getContentScaleFactor();
+    AXLOG("scale factor: %f", scaleFactor);
     return addShapesWithFile(plist, scaleFactor);
 }
 
@@ -63,6 +64,7 @@ bool PhysicsShapeCache::addShapesWithFile(const std::string &plist, float scaleF
     if (dict.empty())
     {
         // plist file not found
+        AXLOG("%s not found or empty", plist.c_str());    
         return false;
     }
 

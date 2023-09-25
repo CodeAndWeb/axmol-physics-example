@@ -34,6 +34,8 @@
 
 USING_NS_AX;
 
+static ax::Size designResolutionSize = ax::Size(2048, 1152);
+
 AppDelegate::AppDelegate() {}
 
 AppDelegate::~AppDelegate() {}
@@ -79,8 +81,10 @@ bool AppDelegate::applicationDidFinishLaunching()
     director->setAnimationInterval(1.0f / 60);
 
     // Set the design resolution
-    glView->setDesignResolutionSize(640, 1136, ResolutionPolicy::SHOW_ALL);
-
+    glView->setDesignResolutionSize(designResolutionSize.width, designResolutionSize.height,
+                                    ResolutionPolicy::NO_BORDER);
+    auto frameSize = glView->getFrameSize();
+    
     register_all_packages();
 
     // create a scene. it's an autorelease object

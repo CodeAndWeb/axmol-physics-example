@@ -42,7 +42,7 @@ bool HelloWorld::init()
 {
     //////////////////////////////
     // 1. super init first
-    if (!Scene::initWithPhysics())
+    if (!Scene::init())
     {
         return false;
     }
@@ -79,25 +79,31 @@ bool HelloWorld::init()
     /////////////////////////////
     // 3. add your codes below...
 
+    initPhysicsWorld();
+    
     getPhysicsWorld()->setGravity(Vec2(0, -900));
    
     // optional: enable debug draw
-    getPhysicsWorld()->setDebugDrawMask(0xffff);
+//    getPhysicsWorld()->setDebugDrawMask(0xffff);
+    
+    // Load the sprite sheet
+    SpriteFrameCache::getInstance()->addSpriteFramesWithFile("spritesheet.plist");
     
     // Load shapes
-    PhysicsShapeCache::getInstance()->addShapesWithFile("Shapes.plist");
-
-
-    // Load background image
-    Sprite *background = Sprite::create("background.png");
+    PhysicsShapeCache::getInstance()->addShapesWithFile("shapes.plist");
+        
+    // Add background image
+    Sprite *background = Sprite::createWithSpriteFrameName("background.png");
     Vec2 pos = origin + visibleSize/2;
     background->setPosition(pos);
     addChild(background);
-
-    // Add ground sprite and drop a banana
-    spawnSprite("ground.png", pos);
-    spawnSprite("banana.png", pos);
-
+    
+    // Set the ground
+    spawnSprite("ground.png", origin);
+    
+    // and add a physics sprite
+    spawnSprite("banana.png", Vec2(600,800));
+ 
     // Add touch listener
     auto listener = EventListenerTouchOneByOne::create();
     listener->onTouchBegan = AX_CALLBACK_2(HelloWorld::onTouchesBegan, this);
@@ -107,6 +113,31 @@ bool HelloWorld::init()
     scheduleUpdate();
 
     return true; 
+}
+
+void HelloWorld::spawnSprite(const std::string &name, const Vec2 &pos)
+{
+    // create a sprite with the given image name
+    auto sprite = Sprite::createWithSpriteFrameName(name);
+
+    // attach physics body
+    PhysicsShapeCache::getInstance()->setBodyOnSprite(name, sprite);
+
+    // set position and add it to the scene
+    sprite->setPosition(pos);
+    addChild(sprite);
+}
+
+bool HelloWorld::onTouchesBegan(Touch *touch, Event *event)
+{
+    auto touchLoc = touch->getLocation();
+
+    static std::vector<std::string> sprites {"banana.png", "cherries.png", "crate.png", "orange.png"};
+
+    int i = rand() % sprites.size();
+    spawnSprite(sprites[i], touchLoc);
+
+    return false;
 }
 
 void HelloWorld::update(float delta)
@@ -169,30 +200,4 @@ void HelloWorld::menuCloseCallback(Ref* sender)
 
     // EventCustom customEndEvent("game_scene_close_event");
     //_eventDispatcher->dispatchEvent(&customEndEvent);
-}
-
-void HelloWorld::spawnSprite(const std::string &name, Vec2 pos)
-{
-    // create a sprite with the given image name
-    auto sprite = Sprite::create(name);
-
-    // attach physics body
-    PhysicsShapeCache::getInstance()->setBodyOnSprite(name, sprite);
-
-    // set position and add it to the scene
-    sprite->setPosition(pos);
-    addChild(sprite);
-}
-
-bool HelloWorld::onTouchesBegan(Touch *touch, Event *event)
-{
-    auto touchLoc = touch->getLocation();
-
-    static int i = 0;
-    static std::string sprites[] = { "banana.png", "cherries.png", "crate.png", "orange.png" };
-
-    spawnSprite(sprites[i], touchLoc);
-    i = (i + 1) % (sizeof(sprites)/sizeof(sprites[0]));
-
-    return false;
 }
