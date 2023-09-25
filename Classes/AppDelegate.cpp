@@ -67,9 +67,9 @@ bool AppDelegate::applicationDidFinishLaunching()
 #if (AX_TARGET_PLATFORM == AX_PLATFORM_WIN32) || (AX_TARGET_PLATFORM == AX_PLATFORM_MAC) || \
     (AX_TARGET_PLATFORM == AX_PLATFORM_LINUX)
         glView = GLViewImpl::createWithRect(
-            "axmol-physics", ax::Rect(0, 0, designResolutionSize.width, designResolutionSize.height));
+            "PhysicsDemo", ax::Rect(0, 0, designResolutionSize.width, designResolutionSize.height));
 #else
-        glView = GLViewImpl::create("axmol-physics");
+        glView = GLViewImpl::create("PhysicsDemo");
 #endif
         director->setOpenGLView(glView);
     }

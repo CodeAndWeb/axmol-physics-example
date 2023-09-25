@@ -1,6 +1,6 @@
 import java.nio.file.Paths
 include ':libaxmol'
 project(':libaxmol').projectDir = new File(Paths.get("${System.env.AX_ROOT}/core/platform/android/libaxmol").toUri())
-include ':axmol-physics'
-project(':axmol-physics').projectDir = new File(settingsDir, 'app')
-rootProject.name = "axmol-physics"
+include ':PhysicsDemo'
+project(':PhysicsDemo').projectDir = new File(settingsDir, 'app')
+rootProject.name = "PhysicsDemo"

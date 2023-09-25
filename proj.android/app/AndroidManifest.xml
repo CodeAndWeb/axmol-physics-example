@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.codeandweb.axmol-physics"
+    package="com.codeandweb.physicsdemo"
     android:installLocation="auto">
 
     <uses-permission android:name="android.permission.INTERNET"/>
@@ -14,7 +14,7 @@
         
         <!-- Tell AxmolActivity the name of our .so -->
         <meta-data android:name="android.app.lib_name"
-                   android:value="axmol-physics" />
+                   android:value="PhysicsDemo" />
 
         <activity
             android:name="org.axmol.cpp.AppActivity"

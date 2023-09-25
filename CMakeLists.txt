@@ -25,11 +25,11 @@
 
 cmake_minimum_required(VERSION 3.10)
 
-set(APP_NAME axmol-physics)
+set(APP_NAME PhysicsDemo)
 
 project(${APP_NAME})
 
-if(NOT DEFINED BUILD_ENGINE_DONE) # to test axmol-physics into root project
+if(NOT DEFINED BUILD_ENGINE_DONE) # to test PhysicsDemo into root project
     if(XCODE)
         set(CMAKE_XCODE_GENERATE_TOP_LEVEL_PROJECT_ONLY TRUE)
     endif()

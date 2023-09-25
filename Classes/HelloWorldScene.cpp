@@ -108,7 +108,7 @@ bool HelloWorld::init()
     auto listener = EventListenerTouchOneByOne::create();
     listener->onTouchBegan = AX_CALLBACK_2(HelloWorld::onTouchesBegan, this);
     _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
-
+    
     // scheduleUpdate() is required to ensure update(float) is called on every loop
     scheduleUpdate();
 
@@ -133,7 +133,7 @@ bool HelloWorld::onTouchesBegan(Touch *touch, Event *event)
     auto touchLoc = touch->getLocation();
 
     static std::vector<std::string> sprites {"banana.png", "cherries.png", "crate.png", "orange.png"};
-
+    
     int i = rand() % sprites.size();
     spawnSprite(sprites[i], touchLoc);
 
